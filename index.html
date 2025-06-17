@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lottery Number Predictor</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; text-align: center; }
+  h1 { color: #2c3e50; }
+  button { background: #27ae60; color: white; border: none; padding: 10px 20px; font-size: 18px; border-radius: 5px; cursor: pointer; margin: 15px 0; }
+  button:hover { background: #219150; }
+  #prediction { font-size: 24px; margin-top: 20px; color: #2980b9; }
+  section { margin-top: 40px; text-align: left; }
+  ul { list-style: none; padding-left: 0; }
+  li { background: #ecf0f1; margin: 6px 0; padding: 10px; border-radius: 4px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>Lottery Number Predictor</h1>
+
+<button onclick="generatePrediction()">Generate Prediction</button>
+
+<div id="prediction">Click the button to get your lottery numbers!</div>
+
+<section>
+  <h2>Past Results</h2>
+  <ul id="historyList"></ul>
+</section>
+
+<script>
+  // Past lottery results (replace with real data if you want)
+  const pastResults = [
+    [4, 7, 13, 20, 27, 32],
+    [6, 11, 17, 23, 30, 36],
+    [1, 5, 14, 22, 28, 35],
+    [3, 8, 15, 21, 29, 34],
+    [2, 9, 12, 19, 25, 33]
+  ];
+
+  // Show past results on page load
+  const historyList = document.getElementById('historyList');
+  pastResults.forEach(nums => {
+    const li = document.createElement('li');
+    li.textContent = nums.join(', ');
+    historyList.appendChild(li);
+  });
+
+  // Generate 6 unique random numbers between 1 and 40
+  function generatePrediction() {
+    let numbers = new Set();
+    while (numbers.size < 6) {
+      numbers.add(Math.floor(Math.random() * 40) + 1);
+    }
+    const predictionArray = Array.from(numbers).sort((a,b) => a-b);
+    document.getElementById('prediction').textContent = predictionArray.join(', ');
+  }
+</script>
+
+</body>
+</html>
